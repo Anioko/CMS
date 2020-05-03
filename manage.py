@@ -43,6 +43,13 @@ def recreate_db():
     db.create_all()
     db.session.commit()
 
+@manager.command
+def create_tables():
+    """
+    Creates new tables without dropping the database
+    """
+    db.create_all()
+    db.session.commit()
 
 @manager.option(
     '-n',

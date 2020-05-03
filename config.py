@@ -20,7 +20,7 @@ if os.path.exists('config.env'):
 
 
 class Config:
-    APP_NAME = os.environ.get('APP_NAME', 'Flask-Base')
+    APP_NAME = os.environ.get('APP_NAME', 'CMS')
 
     if os.environ.get('SECRET_KEY'):
         SECRET_KEY = os.environ.get('SECRET_KEY')
@@ -28,6 +28,7 @@ class Config:
         SECRET_KEY = 'SECRET_KEY_ENV_VAR_NOT_SET'
         print('SECRET KEY ENV VAR NOT SET! SHOULD NOT SEE IN PRODUCTION')
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Email
     MAIL_SERVER = os.environ.get('MAIL_SERVER', 'smtp.sendgrid.net')
@@ -45,7 +46,7 @@ class Config:
     # Admin account
     ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', 'password')
     ADMIN_EMAIL = os.environ.get(
-        'ADMIN_EMAIL', 'flask-base-admin@example.com')
+        'ADMIN_EMAIL', 'aniekanokono@gmail.com')
     EMAIL_SUBJECT_PREFIX = '[{}]'.format(APP_NAME)
     EMAIL_SENDER = '{app_name} Admin <{email}>'.format(
         app_name=APP_NAME, email=MAIL_USERNAME)
@@ -53,6 +54,9 @@ class Config:
     REDIS_URL = os.getenv('REDISTOGO_URL', 'http://localhost:6379')
 
     RAYGUN_APIKEY = os.environ.get('RAYGUN_APIKEY')
+    # Upload
+    UPLOAD_DIR = os.path.join(basedir, '/app/static/uploads')
+    ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
     # Parse the REDIS_URL to set RQ config variables
     if PYTHON_VERSION == 3:

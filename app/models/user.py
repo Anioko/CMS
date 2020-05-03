@@ -9,6 +9,7 @@ from .. import db, login_manager
 
 class Permission:
     GENERAL = 0x01
+    EDIT = 0x07
     ADMINISTER = 0xff
 
 
@@ -25,6 +26,7 @@ class Role(db.Model):
     def insert_roles():
         roles = {
             'User': (Permission.GENERAL, 'main', True),
+            'Editor': (Permission.EDIT, 'site', False),
             'Administrator': (
                 Permission.ADMINISTER,
                 'admin',
@@ -37,7 +39,7 @@ class Role(db.Model):
                 role = Role(name=r)
             role.permissions = roles[r][0]
             role.index = roles[r][1]
-            role.default = roles[r][2]
+            role.default = roles[r][2][3]
             db.session.add(role)
         db.session.commit()
 
@@ -54,6 +56,11 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(64), unique=True, index=True)
     password_hash = db.Column(db.String(128))
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
+    pages = db.relationship('Page', backref='user', lazy='dynamic')
+    blogposts = db.relationship('BlogPost', backref='user', lazy='dynamic')
+    #users = db.relationship('User', backref='role', lazy='dynamic')
+    created_on = db.Column(db.DateTime)
+    username = db.Column(db.String(64), unique=True, index=True) #Notsure if this is used
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
@@ -67,12 +74,18 @@ class User(UserMixin, db.Model):
     def full_name(self):
         return '%s %s' % (self.first_name, self.last_name)
 
+    def __repr__(self):
+        return '<User {!r}>'.format(self.username)#Notsure if this is used
+
     def can(self, permissions):
         return self.role is not None and \
             (self.role.permissions & permissions) == permissions
 
     def is_admin(self):
         return self.can(Permission.ADMINISTER)
+
+    def is_editor(self):
+        return self.can(Permission.EDIT)
 
     @property
     def password(self):

@@ -1,0 +1,115 @@
+{% import 'macros/settings_macros.html' as nav %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        {% include 'partials/_head.html' %}
+        {# Any templates that extend this template can set custom_head_tags to add scripts to their page #}
+        {% block head %}
+        {% endblock %}
+    </head>
+    <body>
+      {# Example dropdown menu setup. Uncomment lines to view
+        {% set dropdown = 
+          [
+            ('account stuff',
+              [
+                ('account.login', 'login', 'sign in'),
+                ('account.logout', 'logout', 'sign out'),
+                ('2nd drop', [
+                  ('account.login', 'login 2', ''),
+                  ('3rd drop', [
+                    ('main.index', 'home 2', '')
+                  ])
+                ])
+              ]
+            ),
+            ('main.index', 'home 1', 'home')
+          ]
+        %}
+      #}
+
+        {% block nav %}
+          {# add dropdown variable here to the render_nav method to render dropdowns #}
+          {{ nav.render_nav(current_user) }}
+        {% endblock %}
+
+        {% include 'partials/_flashes.html' %}
+        {# When extended, the content block contains all the html of the webpage #}
+{% block content %}
+    <!-- Content -->
+    <section id="layout-content">
+        <div class="container">
+            {% block page_content %}{% endblock %}
+        </div>
+    </section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="muted credit">&copy; {{ settings['site_name'] }}.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h3>{{ settings['tagline'] }}</h3>
+                        <div class="h-card">
+                            <span class="p-name">{{ settings['h_card_name'] }}</span>
+                            <img class="u-photo" src="{{ settings['h_card_photo_url'] }}" alt="{{ settings['h_card_name'] }}" />
+                            <p class="p-note">
+                                {{ settings['h_card_note'] }}
+                            </p>
+                            <h4>{{ settings['Tagline'] }}</h3>
+                            <ul>
+                                {% if settings['twitter_url'] %}
+                                    <li>
+                                        <a href="{{ settings['twitter_url'] }}" rel="me" target="_blank">Twitter</a>
+                                    </li>
+                                {% endif %}
+                                {% if settings['github_url'] %}
+                                    <li>
+                                        <a href="{{ settings['github_url'] }}" rel="me" target="_blank">Github</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <!-- Footer -->
+		  <div class="ui inverted vertical footer segment">
+			<div class="ui container">
+			  <div class="ui stackable inverted divided equal height stackable grid">
+				<div class="three wide column">
+				  <h4 class="ui inverted header">About</h4>
+				  <div class="ui inverted link list">
+					<a href="#" class="item">Sitemap</a>
+					<a href="#" class="item">Contact Us</a>
+					<a href="#" class="item">Religious Ceremonies</a>
+					<a href="#" class="item">Gazebo Plans</a>
+				  </div>
+				</div>
+				<div class="three wide column">
+				  <h4 class="ui inverted header">Services</h4>
+				  <div class="ui inverted link list">
+					<a href="#" class="item">Banana Pre-Order</a>
+					<a href="#" class="item">DNA FAQ</a>
+					<a href="#" class="item">How To Access</a>
+					<a href="#" class="item">Favorite X-Men</a>
+				  </div>
+				</div>
+				<div class="seven wide column">
+				  <h4 class="ui inverted header">Footer Header</h4>
+				  <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</div>
+{% endblock %}
+
+        {# Implement CSRF protection for site #}
+        {% if csrf_token()|safe %}
+            <div style="visibility: hidden; display: none">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token()|safe }}">
+            </div>
+        {% endif %}
+    </body>
+</html>

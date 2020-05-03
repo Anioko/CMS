@@ -68,7 +68,7 @@ def delete_site_setting(id):
         db.session.delete(setting)
 
         flash('"{0}" has been deleted.'.format(setting.name))
-        return redirect(url_for('.settings'))
+        return redirect(url_for('settings.site_settings'))
 
     flash('Setting does not exist')
-    return redirect(url_for('.settings'))
+    return redirect(url_for('settings.site_settings'))

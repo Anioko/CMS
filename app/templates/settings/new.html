@@ -1,13 +1,34 @@
-{# extends 'layouts/settings.html' #}
+{%  extends 'layouts/base.html'  %}
 {% import 'macros/form_macros.html' as f %}
 
-
-{% block page_content %}
-
-<h1 class="page-header">Add Site Setting</h1>
+{% block content %}
     <div class="ui grid container">
         <div class="eight wide computer sixteen wide mobile centered column">
-            <h2 class="ui dividing header">Log in</h2>
+			<div class="ui raised segment">
+			  <h4>Example </h4>
+			   <p>Name : Car , Value : Volvo x60. Hopefully this makes sense. If it does not then search for read this annswer for 
+			   <a href="https://stackoverflow.com/questions/25955749/what-is-a-key-value-pair">Key Value pairs</a>
+			   </p>
+			   <p> Use Snake_Case style when inserting the names e.g 'Google_Analytics_Api' or 'Range_Rover' . </p>
+				<p> Frequently_Asked_Question</p>
+				<ul class="ui list">
+				  <li>Question_One
+					<ul>
+					  <li>Answer_One</li>
+					</ul>
+				  </li>
+				  <li>Question_Two
+					<ul>
+					  <li>Answer_Two</li>
+					</ul>
+				  </li>
+					<ul>
+					  <li>More_Questions</li>
+					  <p> Frequently aked questions stop at 10  questions and answers</p>
+					</ul>
+				</ul>
+			</div>		
+            <h2 class="ui dividing header">Add</h2>
 
             {% set flashes = {
                 'error':   get_flashed_messages(category_filter=['form-error']),

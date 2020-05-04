@@ -11,20 +11,8 @@ from wtforms.fields import (
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import Email, EqualTo, InputRequired, Length
 
-from app.models import User
 
-
-class LoginForm(FlaskForm):
-    email = EmailField(
-        'Email', validators=[InputRequired(),
-                             Length(1, 64),
-                             Email()])
-    password = PasswordField('Password', validators=[InputRequired()])
-    remember_me = BooleanField('Keep me logged in')
-    submit = SubmitField('Log in')
-
-
-class RegistrationForm(FlaskForm):
+class ContactForm(FlaskForm):
     first_name = StringField(
         'First name', validators=[InputRequired(),
                                   Length(1, 64)])
@@ -294,9 +282,10 @@ class RegistrationForm(FlaskForm):
     description = TextAreaField('Description', validators=[InputRequired()])
 
     submit = SubmitField('Submit')
-
+'''
     def check_email(self, field): ## change this to check for using this https://github.com/syrusakbary/validate_email
         if User.query.filter_by(email=field.data).first():
             raise ValidationError('Email already registered. (Did you mean to '
                                   '<a href="{}">log in</a> instead?)'.format(
                                     url_for('account.login')))
+'''

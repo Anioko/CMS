@@ -1,15 +1,15 @@
 {% extends 'layouts/settings.html' %}
-{% block page_content %}
-    <div class="row">
-        <div class="col-md-12">
-            <h1 class="page-header">
+{% block content %}
+    <div class="ui grid container">
+        <div class="eight wide computer sixteen wide mobile centered column">
+            <h1 class="ui container">
                 Site Settings
-                <a href="{{ url_for('.new_site_setting') }}" class="btn btn-primary pull-right">
-                    <i class="fa fa-plus"></i>Add
+                <a href="{{ url_for('settings.new_site_setting') }}" class="ui right floated button">
+                    <i class="plus icon"></i>Add
                 </a>
             </h1>
 
-            <table class="table table-bordered table-stripped">
+            <table class="ui selectable celled table">
                 <thead>
                     <tr>
                         <th>Setting</th>
@@ -23,12 +23,12 @@
                             <td>{{ setting.name }}</td>
                             <td>{{ setting.value }}</td>
                             <td>
-                                <a href="{{ url_for('.edit_site_setting', id=setting.id) }}"
-                                    class="btn btn-primary">
-                                    <i class="fa fa-edit"></i>Edit
+                                <a href="{{ url_for('settings.edit_site_setting', id=setting.id) }}"
+                                    class="ui primary button">
+                                    <i class="edit icon"></i>Edit
                                 </a>
-                                <a href="{{ url_for('.delete_site_setting', id=setting.id) }}" class="btn btn-danger">
-                                    <i class="fa fa-trash"></i>Delete
+                                <a href="{{ url_for('settings.delete_site_setting', id=setting.id) }}" class="ui button">
+                                    <i class="trash icon"></i>Delete
                                 </a>
                             </td>
                         </tr>

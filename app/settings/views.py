@@ -4,12 +4,14 @@ from app.models import EditableHTML, SiteSetting
 from .forms import SiteSettingForm
 import commonmark
 from app import db
+from app.decorators import admin_required
 settings = Blueprint('settings', __name__)
 
 
 
 @settings.route('/')
 @login_required
+@admin_required
 def site_settings():
     all_settings = SiteSetting.query.all()
     return render_template("settings/index.html",
@@ -18,6 +20,7 @@ def site_settings():
 
 @settings.route('/<int:id>', methods=['GET', 'POST'])
 @login_required
+@admin_required
 def edit_site_setting(id):
     form = SiteSettingForm()
 
@@ -32,7 +35,7 @@ def edit_site_setting(id):
         db.session.add(site_setting)
         flash('"{0}" has been saved'.format(site_setting.name))
 
-        return redirect(url_for('.settings'))
+        return redirect(url_for('settings.site_settings'))
 
     form.name.data = site_setting.name
     form.value.data = site_setting.value
@@ -43,6 +46,7 @@ def edit_site_setting(id):
 
 @settings.route('/new', methods=['GET', 'POST'])
 @login_required
+@admin_required
 def new_site_setting():
     form = SiteSettingForm()
 
@@ -61,6 +65,7 @@ def new_site_setting():
 
 @settings.route('/delete/<int:id>')
 @login_required
+@admin_required
 def delete_site_setting(id):
     setting = SiteSetting.query.filter_by(id=id).first()
 

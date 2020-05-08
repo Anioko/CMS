@@ -352,8 +352,13 @@
 				  </ul>
 				</div>
 			  </div>
-			  <div class="collapse navbar-collapse justify-content-end col flex-fill px-0"><a href="https://themes.getbootstrap.com/product/{% if settings['Site_Name'] is defined %}{{ settings['Site_Name'] }}{% else %}{{ settings['Site_Name'] }}{% endif %}-multipurpose-bootstrap-theme/" class="btn btn-primary ml-lg-3">Purchase Now</a>
-
+			   {% if settings['blog_menu'] is defined %}
+			    {% for item in menu.menu_items.all() %}
+			  <div class="collapse navbar-collapse justify-content-end col flex-fill px-0"><a href="{{ item.slug }}" class="btn btn-primary ml-lg-3">{{ item.name }}</a>
+                            {% endfor %}
+                        {% else %}
+                            <li><a href="/">Home</a></li>
+                        {% endif %}
 			  </div>
 			</div>
 		  </nav>

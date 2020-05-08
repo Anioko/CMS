@@ -14,5 +14,11 @@ class Page(db.Model):
     published_on = db.Column(db.DateTime)
     is_homepage = db.Column(db.Boolean)
 
+
+    def __init__(self, title, content):
+        self.title = title
+        self.content = content
+        self.slug = slugfiy(title)
+
     def __repr__(self):
         return '<Page {!r}>'.format(self.title)

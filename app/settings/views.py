@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import Blueprint, render_template, redirect, url_for, flash, abort
 from flask_login import login_required
 from app.models import EditableHTML, SiteSetting
@@ -92,6 +93,7 @@ def blog_posts(page):
 
 @settings.route('/posts/<post_id>', methods=['GET', 'POST'])
 @login_required
+@admin_required
 def edit_blog_post(post_id):
     form = PostForm()
     post = BlogPost.query.filter_by(id=post_id).first()
@@ -124,6 +126,7 @@ def edit_blog_post(post_id):
 
 @settings.route('/posts/new', methods=['GET', 'POST'])
 @login_required
+@admin_required
 def add_blog_post():
     form = PostForm()
 
@@ -149,6 +152,7 @@ def add_blog_post():
 
 @settings.route('/posts/delete/<post_id>', methods=['GET', 'POST'])
 @login_required
+@admin_required
 def delete_blog_post(post_id):
     post = BlogPost.query.filter_by(id=post_id).first()
 
@@ -165,6 +169,7 @@ def delete_blog_post(post_id):
 @settings.route('/categories', defaults={'page': 1})
 @settings.route('/categories/<int:page>')
 @login_required
+@admin_required
 def blog_categories(page):
     the_categories = BlogCategory.query.order_by(
         BlogCategory.name).paginate(page, 5)
@@ -173,6 +178,7 @@ def blog_categories(page):
 
 @settings.route('/categories/<int:category_id>', methods=['GET', 'POST'])
 @login_required
+@admin_required
 def edit_blog_category(category_id):
     form = EditCategoryForm()
     category = BlogCategory.query.filter_by(id=category_id).first()
@@ -201,6 +207,7 @@ def edit_blog_category(category_id):
 
 @settings.route('/categories/new', methods=['GET', 'POST'])
 @login_required
+@admin_required
 def add_blog_category():
     form = EditCategoryForm()
 
@@ -222,6 +229,7 @@ def add_blog_category():
 
 @settings.route('/categories/delete/<int:category_id>', methods=['GET', 'POST'])
 @login_required
+@admin_required
 def delete_blog_category(category_id):
     category = BlogCategory.query.filter_by(id=category_id).first()
 

@@ -1,52 +1,37 @@
-{% extends "admin/base.html" %}
 
-{% block title %}{{ super() }} - Blog Categories{% endblock %}
+{%  extends 'layouts/base.html'  %}
+{% import 'macros/form_macros.html' as f %}
 
-{% block page_content %}
+{% block content %}
+    <div class="ui grid container">
+        <div class="eight wide computer sixteen wide mobile centered column">
+			<!--<div class="ui raised segment">
+			  <h4>Example </h4>
+			   <p>Name : Car , Value : Volvo x60. Hopefully this makes sense. If it does not then search for read this annswer for 
+			   <a href="https://stackoverflow.com/questions/25955749/what-is-a-key-value-pair">Key Value pairs</a>
+			   </p>
+			   <p> Use Snake_Case style when inserting the names e.g 'Google_Analytics_Api' or 'Range_Rover' . </p>
+			</div>-->		
+            <h2 class="ui dividing header">Add Categories</h2>
 
-    <form role="form" id="category-form" method="POST" action="{{ url_for('.add_blog_category') }}">
-        <div class="form-group">
-            {{ form.name.label(class="control-label") }}
-            {{ form.name(class="form-control") }}
-            {% if form.name.errors %}
-                <ul class="errors">
-                    {% for error in form.name.errors %}
-                        <li class="small">{{ error }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
+            {% set flashes = {
+                'error':   get_flashed_messages(category_filter=['form-error']),
+                'warning': get_flashed_messages(category_filter=['form-check-email']),
+                'info':    get_flashed_messages(category_filter=['form-info']),
+                'success': get_flashed_messages(category_filter=['form-success'])
+            } %}
+
+            {{ f.begin_form(form, flashes) }}
+                {{ f.render_form_field(form.name) }}
+                {{ f.render_form_field(form.slug) }}
+                {{ f.render_form_field(form.description) }}
+                {{ f.form_message(flashes['error'], header='Something went wrong.', class='error') }}
+                {{ f.form_message(flashes['warning'], header='Check your email.', class='warning') }}
+                {{ f.form_message(flashes['info'], header='Information', class='info') }}
+                {{ f.form_message(flashes['success'], header='Success!', class='success') }}
+
+                {{ f.render_form_field(form.submit) }}
+            {{ f.end_form(form) }}
         </div>
-        <div class="form-group">
-            {{ form.slug.label(class="control-label") }}
-
-            {{ form.slug(class="form-control", style="display: none;") }}
-            <input type="text" class="form-control" data-bind="value: slug, enable: false" />
-
-            {% if form.slug.errors %}
-                <ul class="errors">
-                    {% for error in form.slug.errors %}
-                        <li class="small">{{ error }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        </div>
-        <div class="form-group">
-            {{ form.description.label(class="control-label") }}
-            {{ form.description(class="form-control") }}
-            {% if form.description.errors %}
-                <ul class="errors">
-                    {% for error in form.description.errors %}
-                        <li class="small">{{ error }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        </div>
-        <div class="row text-right">
-            {{ form.csrf_token }}
-
-            <a href="{{ url_for(".blog_categories") }}" class="btn btn-link">Cancel</a>
-            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i>Save</button>
-        </div>
-    </form>
-
+    </div>
 {% endblock %}

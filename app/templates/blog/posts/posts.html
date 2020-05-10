@@ -1,70 +1,68 @@
-{% extends "admin/base.html" %}
+{% extends "layouts/base.html" %}
 
-{% block title %}{{ super() }} - Posts{% endblock %}
+{% block title %} {{title}} {% endblock %}
 
-{% block page_content %}
+{% block content %}
+    <div class="ui grid container">
+        <div class="eight wide computer sixteen wide mobile centered column">
+            <h1 class="ui container">
+                Site Settings
+                <a href="{{ url_for('settings.add_blog_post') }}" class="ui right floated button">
+                    <i class="plus icon"></i>Add
+                </a>
+            </h1>
 
-<div class="row page-header">
-    <div class="col-md-8">
-        <h1>Blog Posts</h1>
-    </div>
-    <div class="col-md-3">
-    </div>
-    <div class="col-md-1">
-        <a href="{{ url_for('.add_blog_post') }}" class="btn btn-primary pull-right">
-            <i class="fa fa-plus"></i>Add
-        </a>
-    </div>
-</div>
+            <table class="ui selectable celled table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Slug</th>
+                        <th>Created By</th>
+                        <th>Created On</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for post in posts.items  %}
+                        <tr>
+                            <td>{{ post.title }}</td>
+                            <td>{{ post.slug }}</td>
+                            <td>{{ post.username }}</td>
+                            <td>{{ post.created_on.strftime('%Y-%m-%d') }}</td>
+                            <td>{{ post.blogpoststatus.name }}</td>
+                            <td>
+                                <a href="{{ url_for('settings.edit_blog_post', post_id=post.id) }}"
+                                    class="ui primary button">
+                                    <i class="edit icon"></i>Edit
+                                </a>
+                                <a href="{{ url_for('settings.delete_blog_post', post_id=post.id) }}" class="ui button">
+                                    <i class="trash icon"></i>Delete
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
 
-<table class="table table-bordered table-stripped">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Slug</th>
-            <th>Created By</th>
-            <th>Created On</th>
-            <th>Status</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for post in posts.items %}
-            <tr>
-                <td>{{ post.title }}</td>
-                <td>{{ post.slug }}</td>
-                <td>{{ post.user.username }}</td>
-                <td>{{ post.created_on|datetime }}</td>
-                <td>{{ post.blogpoststatus.name }}</td>
-                <td>
-                    <a href="{{ url_for('.edit_blog_post', post_id=post.id) }}" class="btn btn-primary">
-                        <i class="fa fa-edit"></i>Edit
-                    </a>
-                    <a href="{{ url_for('.delete_blog_post', post_id=post.id) }}" class="btn btn-danger">
-                        <i class="fa fa-trash"></i>Delete
-                    </a>
-                </td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
-<nav>
-    <ul class="pager">
-        <li class="next {{ 'disabled' if not posts.has_prev else '' }}">
-            {% if posts.has_prev %}
-                <a href="{{ url_for('.blog_posts', page=posts.prev_num) }}">Next <span aria-hidden="true">&rarr;</span></a>
+<button class="ui right labeled icon button">
+  <i class="right arrow icon">
+  </i>
+             {% if posts.has_prev %}
+          <a href="{{ url_for('settings.blog_posts', page=posts.prev_num) }}">Next </a>
             {% else %}
-                <a>Next <span aria-hidden="true">&rarr;</span></a>
+                <a>Next </a>
             {% endif %}
-        </li>
-        <li class="previous {{ 'disabled' if not posts.has_next else '' }}">
-            {% if posts.has_next %}
-                <a href="{{ url_for('.blog_posts', page=posts.next_num) }}"><span aria-hidden="true">&larr;</span> Previous</a>
+</button>
+<button class="ui leftlabeled icon button">
+  <i class="left arrow icon">
+  </i>
+             {% if posts.has_next%}
+          <a href="{{ url_for('settings.blog_posts', page=posts.next_num) }}">Previous</a>
             {% else %}
-                <a><span aria-hidden="true">&larr;</span> Previous</a>
+                <a>Previous</a>
             {% endif %}
-        </li>
-    </ul>
-</nav>
+</button>
+
 
 {% endblock %}

@@ -11,7 +11,7 @@ from flask_wtf import CSRFProtect
 
 from app.assets import app_css, app_js, vendor_css, vendor_js
 from config import config as Config
-from flaskext.markdown import Markdown
+#from flaskext.markdown import Markdown
 from flask_pagedown import PageDown
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -48,7 +48,7 @@ def create_app(config):
     csrf.init_app(app)
     compress.init_app(app)
     RQ(app)
-    Markdown(app)
+    #Markdown(app)
     pagedown.init_app(app)
     
 

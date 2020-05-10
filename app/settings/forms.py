@@ -26,7 +26,7 @@ class SiteSettingForm(FlaskForm):
     submit = SubmitField('Submit')
     
 
-class PostForm(Form):
+class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired(), Length(1, 128)])
     slug = StringField('Slug/Url', validators=[DataRequired(), Length(1, 256)])
     content = PageDownField('Content')
@@ -44,14 +44,20 @@ class PostForm(Form):
                                for status in BlogPostStatus.query.order_by(BlogPostStatus.name)]
 
 
-class CategoryForm(Form):
+class CategoryForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired(), Length(1, 64)])
     slug = StringField('Slug/Url', validators=[DataRequired(), Length(1, 256)])
     description = StringField("Description", validators=[Length(1, 512)])
     submit = SubmitField('Submit')
 
-class EditCategoryForm(Form):
+class EditCategoryForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired(), Length(1, 64)])
     slug = StringField('Slug/Url', validators=[DataRequired(), Length(1, 256)])
     description = StringField("Description", validators=[Length(1, 512)])
+    submit = SubmitField('Submit')
+    
+class StatusForm(FlaskForm):
+    name = StringField("Name", validators=[InputRequired(), \
+                        Length(min=1, max=128)])
+    #value = StringField("Value", validators=[InputRequired()])
     submit = SubmitField('Submit')

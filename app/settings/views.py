@@ -1,12 +1,12 @@
 from datetime import datetime
 from flask import Blueprint, render_template, redirect, url_for, flash, abort
-from flask_login import login_required
+from flask_login import login_required, current_user
 from app.models import EditableHTML, SiteSetting
-from .forms import SiteSettingForm, PostForm, CategoryForm, EditCategoryForm
+from .forms import SiteSettingForm, PostForm, CategoryForm, EditCategoryForm, StatusForm
 import commonmark
 from app import db
 from app.decorators import admin_required
-from app.models import BlogPost
+from app.models import BlogPost, BlogPostStatus
 from app.models import BlogCategory
 #from .forms import PostForm, CategoryForm, EditCategoryForm
 settings = Blueprint('settings', __name__)
@@ -66,6 +66,24 @@ def new_site_setting():
 
     return render_template("settings/new.html", form=form)
 
+
+@settings.route('/status/new', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def add_blog_status():
+    form = StatusForm()
+
+    if form.validate_on_submit():
+        blog_post_status = BlogPostStatus()
+        blog_post_status.name = form.name.data
+        #blog_post_status.value = form.value.data
+
+        db.session.add(blog_post_status)
+        flash('"{0}" has been saved'.format(blog_post_status.name))
+
+        return redirect(url_for('settings.add_blog_post'))
+
+    return render_template("settings/add_blog_status.html", form=form)
 
 @settings.route('/delete/<int:id>')
 @login_required

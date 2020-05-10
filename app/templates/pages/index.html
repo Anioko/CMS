@@ -1,16 +1,2 @@
 <!------This is the index page that is served on the site root page e.g localhost:5000/ or https:yourwebsite.you/---->
 {% extends 'layouts/page.html' %}
-
-{% block title %}{{ super() }}{% endblock %}
-
-{% block page_content %}
-    <div class="ui text container">
-      <h1>{% if settings['Title'] is defined %}{{ settings['Title'] }}{% else %}{{ settings['Site_Name'] }}{% endif %}
-	  </h1>
-
-    <div class="ui text container">
-	 {{ page.Title }}
-      {{ page.Content|safe }}
-    </div>
-    </div>
-{% endblock %}

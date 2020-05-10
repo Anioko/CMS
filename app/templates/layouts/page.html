@@ -353,9 +353,9 @@
 				</div>
 			  </div>
 			   {% if settings['blog_menu'] is defined %}
-			    {% for item in menu.menu_items.all() %}
-			  <div class="collapse navbar-collapse justify-content-end col flex-fill px-0"><a href="{{ item.slug }}" class="btn btn-primary ml-lg-3">{{ item.name }}</a>
-                            {% endfor %}
+			    {# for item in menu.menu_items.all() #}
+			  <div class="collapse navbar-collapse justify-content-end col flex-fill px-0"><a href="{{ settings['blog_menu.slug'] }}" class="btn btn-primary ml-lg-3">{{ settings['blog_menu.slug'] }}</a>
+                            {# endfor #}
                         {% else %}
                             <li><a href="/">Home</a></li>
                         {% endif %}
@@ -367,7 +367,7 @@
     <!-- Content -->
     <section id="layout-content">
         <div class="container">
-            {% block page_content %}{% endblock %}
+            {% block content %}{% endblock %}
         </div>
     <!-- Marketing Video-->
 	<section>

@@ -69,14 +69,14 @@
 	    <style>
       @keyframes hideLoader{0%{ width: 100%; height: 100%; }100%{ width: 0; height: 0; }  }  body > div.loader{ position: fixed; background: white; width: 100%; height: 100%; z-index: 1071; opacity: 0; transition: opacity .5s ease; overflow: hidden; pointer-events: none; display: flex; align-items: center; justify-content: center;}body:not(.loaded) > div.loader{ opacity: 1;}body:not(.loaded){ overflow: hidden;}  body.loaded > div.loader{animation: hideLoader .5s linear .5s forwards;  } /* Typing Animation */.loading-animation {width: 6px;height: 6px;border-radius: 50%;animation: typing 1s linear infinite alternate;position: relative;left: -12px;}@keyframes typing {0% {background-color: rgba(100,100,100, 1);box-shadow: 12px 0px 0px 0px rgba(100,100,100, 0.2),24px 0px 0px 0px rgba(100,100,100, 0.2);}25% {background-color: rgba(100,100,100, 0.4);box-shadow: 12px 0px 0px 0px rgba(100,100,100, 2),24px 0px 0px 0px rgba(100,100,100, 0.2);}75% {background-color: rgba(100,100,100, 0.4);box-shadow: 12px 0px 0px 0px rgba(100,100,100, 0.2),24px 0px 0px 0px rgba(100,100,100, 1);}}
     </style>
-    <script type="text/javascript">
-      window.addEventListener("load", function () {    document.querySelector('body').classList.add('loaded');  });
-    </script>
+    <!--<script type="text/javascript"
+      //window.addEventListener("load", function () {    document.querySelector('body').classList.add('loaded');  });
+    </script>-->
   </head>
   <body>
-		<div class="loader">
+		<!--<div class="loader"> <!---posssible slows the loading itoo much so I commented it out--->
 			<div class="loading-animation"></div>
-		</div>
+		</div>-->
 		<div class="navbar-container ">
 		  <nav class="navbar navbar-expand-lg justify-content-between navbar-light border-bottom-0 bg-white" data-sticky="top">
 			<div class="container">
@@ -417,10 +417,9 @@
       <div class="container">
         <div class="row justify-content-center text-center mb-6">
           <div class="col-xl-8 col-lg-9">
-		  {% if settings['Pricing_Headline']  is defined %}
+		  {% if settings['Pricing_Headline']  is not none %}
             <h2 class="display-4 mx-xl-6">{{ settings['Pricing_Headline'] }}</h2>
-					  {% endif %}
-					    {% if settings['Pricing_Headline_Description']  is defined %}
+
             <p class="lead">
               {{ settings['Pricing_Headline_Description'] }}
             </p>
@@ -429,25 +428,29 @@
         </div>
         <div class="row justify-content-center">
           <div class="col-xl-10" data-aos="fade-up">
+		  {% if settings['Competitor_Logo_One']  is not none %}
             <table class="table pricing-table pricing-table-competitors">
               <thead>
                 <tr>
                   <th scope="col"></th>
                   <th scope="col" class="bg-primary-alt">
-                    <img src="assets/img/logo.svg" alt="Image">
+                    <img src="assets/img/{{ settings['Logo'] }}" alt="Image">
                   </th>
                   <th scope="col">
-                    <img src="assets/img/dropbox.svg" alt="Image">
+                    <img src="assets/img/{{ settings['Competitor_Logo_One'] }}" alt="Image">
                   </th>
                   <th scope="col">
-                    <img src="assets/img/invision.svg" alt="Image">
+                    <img src="assets/img/{{ settings['Competitor_Logo_Two'] }}" alt="Image">
                   </th>
                 </tr>
               </thead>
+			   {% endif %}	
+			   
               <tbody>
+			   {% if settings['Feature_One']  is not none %}
                 <tr>
                   <th scope="row">
-                    <span class="h6 mb-0 d-block">Integrations</span>
+                    <span class="h6 mb-0 d-block">{{ settings['Feature_One'] }}</span>
                     <span class="text-small text-muted"></span>
                   </th>
                   <td class="bg-primary-alt">
@@ -466,9 +469,11 @@
                     </div>
                   </td>
                 </tr>
+				 {% endif %}
                 <tr>
+				 {% if settings['Feature_Two']  is not none %}
                   <th scope="row">
-                    <span class="h6 mb-0 d-block">Segmentation</span>
+                    <span class="h6 mb-0 d-block">{{ settings['Feature_Two'] }}</span>
                     <span class="text-small text-muted"></span>
                   </th>
                   <td class="bg-primary-alt">
@@ -487,9 +492,11 @@
                     </div>
                   </td>
                 </tr>
+				 {% endif %}
+				 {% if settings['Feature_Three']  is defined %}
                 <tr>
                   <th scope="row">
-                    <span class="h6 mb-0 d-block">White Labelling</span>
+                    <span class="h6 mb-0 d-block">{{ settings['Feature_Three'] }}</span>
                     <span class="text-small text-muted"></span>
                   </th>
                   <td class="bg-primary-alt">
@@ -508,9 +515,11 @@
                     </div>
                   </td>
                 </tr>
+				 {% endif %}
                 <tr>
+				 {% if settings['Feature_Four']  is defined %}
                   <th scope="row">
-                    <span class="h6 mb-0 d-block">Document Signing</span>
+                    <span class="h6 mb-0 d-block">{{ settings['Feature_Four'] }}</span>
                     <span class="text-small text-muted"></span>
                   </th>
                   <td class="bg-primary-alt">
@@ -525,9 +534,11 @@
                   </td>
                   <td></td>
                 </tr>
+				 {% endif %}
                 <tr>
+				 {% if settings['Feature_Five']  is defined %}
                   <th scope="row">
-                    <span class="h6 mb-0 d-block">Personalised Support</span>
+                    <span class="h6 mb-0 d-block">{{ settings['Feature_Five'] }}</span>
                     <span class="text-small text-muted"></span>
                   </th>
                   <td class="bg-primary-alt">
@@ -542,9 +553,11 @@
                     </div>
                   </td>
                 </tr>
+				 {% endif %}
+				 {% if settings['Feature_Six']  is defined %}
                 <tr>
                   <th scope="row">
-                    <span class="h6 mb-0 d-block">Storage</span>
+                    <span class="h6 mb-0 d-block">{{ settings['Feature_Six'] }}</span>
                     <span class="text-small text-muted"></span>
                   </th>
                   <td class="bg-primary-alt">
@@ -555,9 +568,11 @@
                   <td></td>
                   <td></td>
                 </tr>
+				 {% endif %}
+				 {% if settings['Feature_Seven']  is defined %}
                 <tr>
                   <th scope="row">
-                    <span class="h6 mb-0 d-block">Funnels</span>
+                    <span class="h6 mb-0 d-block">{{ settings['Feature_Seven'] }}</span>
                     <span class="text-small text-muted"></span>
                   </th>
                   <td class="bg-primary-alt">
@@ -571,60 +586,13 @@
                     </div>
                   </td>
                   <td></td>
+				  				 {% endif %}
                 </tr>
               </tbody>
             </table>
-            <div class="text-right">
-              <a href="#" class="hover-arrow">Explore all features</a>
-            </div>
-          </div>
-        </div>
-        <div class="row justify-content-center mt-6">
-          <div class="col-xl-7 col-lg-8 col-md-10">
-            <div data-flickity='{ "imagesLoaded": true, "wrapAround": true }'>
-              <div class="carousel-cell mx-md-4">
-                <div class="card card-body flex-row py-4">
-                  <img src="assets/img/avatars/male-2.jpg" alt="Avatar" class="avatar avatar-lg">
-                  <div class="ml-3">
-                    <h4>
-            &ldquo;The team were only too happy to help me getting started.&rdquo;
-        </h4>
-                    <div class="avatar-author d-block">
-                      <h6>Anil Kumar</h6>
-                      <span>Designer</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-cell mx-md-4">
-                <div class="card card-body flex-row py-4">
-                  <img src="assets/img/avatars/male-1.jpg" alt="Avatar" class="avatar avatar-lg">
-                  <div class="ml-3">
-                    <h4>
-            &ldquo;Once again, my expectations have been surpassed – Bravo!&rdquo;
-        </h4>
-                    <div class="avatar-author d-block">
-                      <h6>Benjamin Cameronr</h6>
-                      <span>Designer</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-cell mx-md-4">
-                <div class="card card-body flex-row py-4">
-                  <img src="assets/img/avatars/female-4.jpg" alt="Avatar" class="avatar avatar-lg">
-                  <div class="ml-3">
-                    <h4>
-            &ldquo;What usually takes at least 2 or 3 weeks was reduced to 4 days.&rdquo;
-        </h4>
-                    <div class="avatar-author d-block">
-                      <h6>Annabelle Porter</h6>
-                      <span>Designer</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <!---div class="text-right">
+              <a href="#" class="hover-arrow">{# settings['Feature_Eight'] #}</a>
+            </div>----->
           </div>
         </div>
       </div>

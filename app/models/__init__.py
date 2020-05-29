@@ -16,3 +16,8 @@ from .photogalleryitem import *  # noqa
 from .page import *  # noqa
 from .sitesetting import *  # noqa
 from .upload import *  # noqa
+
+from .employment import *  # noqa
+from .school import *  # noqa
+from .workplace import *  # noqa
+from .opportunity import *  # noqa

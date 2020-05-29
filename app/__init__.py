@@ -116,6 +116,8 @@ def create_app(config):
     from .opportunity import opportunity as opportunity_blueprint
     app.register_blueprint(oppportunity_blueprint, url_prefix='/account/opportunity')
 
+    from .contractor import contractor as contractor_blueprint
+    app.register_blueprint(contractor_blueprint, url_prefix='/account/contractor')
 
     from .account import account as account_blueprint
     app.register_blueprint(account_blueprint, url_prefix='/account')

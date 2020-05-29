@@ -40,28 +40,28 @@
         <div class="column">
             <!--<div style="text-align:center;" class="row btn-group">-->
 
-            <a href="http://www.facebook.com/sharer.php?u={{ url_for('opportunity.opportunity_details',opportunity_id=appt.id, title=appt.title,city=appt.city,state=appt.state, country=appt.country, _external=True) }}"
+            <a href="http://www.facebook.com/sharer.php?u={{ url_for('opportunity.opportunity_details',title=appt.title,city=appt.city,state=appt.state, country=appt.country, _external=True) }}"
                title="On Facebook" target="_blank" class="btn btn-default" style="margin-right:-10px;">
                 <i class="fa fa-facebook fa-2x"></i>
             </a>
 
-            <a href="http://www.facebook.com/sharer.php?u={{ url_for('opportunity.opportunity_details',opportunity_id=appt.id, title=appt.title,city=appt.city,state=appt.state, country=appt.country, _external=True) }}"
+            <a href="http://www.facebook.com/sharer.php?u={{ url_for('opportunity.opportunity_details',title=appt.title,city=appt.city,state=appt.state, country=appt.country, _external=True) }}"
                title="On Facebook" target="_blank" class="btn btn-default" style="margin-right:-10px;">
                 <i class="fa fa-facebook fa-2x"></i>
             </a>
 
-            <a href="https://twitter.com/intent/tweet?url={{ url_for('opportunity.opportunity_details',opportunity_id=appt.id, title=appt.title,city=appt.city,state=appt.state, country=appt.country, _external=True) }}&via=Teachera&text={{ appt.title }}%20-%20Mediville.com!&hashtags={{ appt.title }},{{ appt.city }}"
+            <a href="https://twitter.com/intent/tweet?url={{ url_for('opportunity.opportunity_details',title=appt.title,city=appt.city,state=appt.state, country=appt.country, _external=True) }}&via=Teachera&text={{ appt.title }}%20-%20Mediville.com!&hashtags={{ appt.title }},{{ appt.city }}"
                title="On Twitter" target="_blank" class="btn btn-default" style="margin-right:-10px;">
                 <i class="fa fa-twitter fa-2x"></i>
             </a>
 
 
-            <a href="http://www.linkedin.com/shareArticle?mini=true&url={{ url_for('opportunity.opportunity_details',opportunity_id=appt.id, title=appt.title,city=appt.city,state=appt.state, country=appt.country, _external=True) }}&title={{ appt.title }} in {{ appt.city }}&summary=Mediville.com!&source=http://Mediville.com"
+            <a href="http://www.linkedin.com/shareArticle?mini=true&url={{ url_for('opportunity.opportunity_details',title=appt.title,city=appt.city,state=appt.state, country=appt.country, _external=True) }}&title={{ appt.title }} in {{ appt.city }}&summary=Mediville.com!&source=http://Mediville.com"
                title="On LinkedIn" target="_blank" class="btn btn-default" style="margin-right:-10px;">
                 <i class="fa fa-linkedin fa-2x"></i>
             </a>
 
-            <a href="http://vk.com/share.php?url={{ url_for('opportunity.opportunity_details',opportunity_id=appt.id, title=appt.title,city=appt.city,state=appt.state, country=appt.country, _external=True) }}&title={{ appt.title }} in {{ appt.city }}&description=Mediville.com!&image=https%3A%2F%2Ffbcdn-sphotos-g-a.akamaihd.net%2Fhphotos-ak-frc3%2Ft1%2F10007500_219483098251971_1640217409_n.jpg"
+            <a href="http://vk.com/share.php?url={{ url_for('opportunity.opportunity_details',title=appt.title,city=appt.city,state=appt.state, country=appt.country, _external=True) }}&title={{ appt.title }} in {{ appt.city }}&description=Mediville.com!&image=https%3A%2F%2Ffbcdn-sphotos-g-a.akamaihd.net%2Fhphotos-ak-frc3%2Ft1%2F10007500_219483098251971_1640217409_n.jpg"
                title="On VK.com" target="_blank" class="btn btn-default" style="margin-right:-10px;">
                 <i class="fa fa-vk fa-2x"></i>
             </a>
@@ -183,7 +183,7 @@
                     url: '/some-endpoint',
                     data: {
                         email: $('#email').val(),
-                        url: '{{ url_for('opportunity.opportunity_details',opportunity_id=appt.id, title=appt.title,city=appt.city,state=appt.state, country=appt.country,_external=True) }}',
+                        url: '{{ url_for('opportunity.opportunity_details',title=appt.title,city=appt.city,state=appt.state, country=appt.country,_external=True) }}',
                         title: '{{appt.course_title}} in {{appt.city}}',
                     },
 

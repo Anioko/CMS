@@ -12,7 +12,9 @@ from flask_wtf import CSRFProtect
 from app.assets import app_css, app_js, vendor_css, vendor_js
 from config import config as Config
 #from flaskext.markdown import Markdown
-from flask_pagedown import PageDown
+#from flask_pagedown import PageDown
+#from flask_dropzone import Dropzone
+#from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -20,12 +22,18 @@ mail = Mail()
 db = SQLAlchemy()
 csrf = CSRFProtect()
 compress = Compress()
-pagedown = PageDown()
+#pagedown = PageDown()
+#dropzone = Dropzone()
 
 # Set up Flask-Login
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
 login_manager.login_view = 'account.login'
+
+
+#Uploads
+#UPLOAD_FOLDER = '/path/to/the/uploads'
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 
 def create_app(config):
@@ -37,7 +45,25 @@ def create_app(config):
 
     app.config.from_object(Config[config_name])
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    #app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+    app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
     # not using sqlalchemy event system, hence disabling it
+   # Dropzone settings
+    #app.config['DROPZONE_UPLOAD_MULTIPLE'] = True
+    #app.config['DROPZONE_ALLOWED_FILE_CUSTOM'] = True
+    #app.config['DROPZONE_ALLOWED_FILE_TYPE'] = 'image/*'
+    #app.config['DROPZONE_REDIRECT_VIEW'] = 'results'
+    # Uploads settings
+    #app.config['UPLOADED_PHOTOS_DEST'] = '/uploads/'
+    # Uploads settings
+    app.config['UPLOADED_PHOTOS_DEST'] = os.getcwd() + '/static/uploads'
+    app.config['UPLOAD_FOLDER'] = os.getcwd() + '/uploads'
+    app.config['UPLOADS_DEFAULT_DEST'] = os.getcwd() + '/static/uploads'
+
+
+    #photos = UploadSet('photos', IMAGES)
+    #configure_uploads(app, photos)
+    #patch_request_class(app)  # set maximum file size, default is 16MB
 
     Config[config_name].init_app(app)
 
@@ -49,7 +75,8 @@ def create_app(config):
     compress.init_app(app)
     RQ(app)
     #Markdown(app)
-    pagedown.init_app(app)
+    #pagedown.init_app(app)
+    #dropzone.init_app(app)
     
 
     # Register Jinja template functions
@@ -91,4 +118,8 @@ def create_app(config):
 
     from .blog import blog as blog_blueprint
     app.register_blueprint(blog_blueprint, url_prefix='/blog')
+
+    from .uploads import uploads as uploads_blueprint
+    app.register_blueprint(uploads_blueprint, url_prefix='/uploads')
+    
     return app

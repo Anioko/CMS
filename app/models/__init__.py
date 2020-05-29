@@ -15,3 +15,4 @@ from .photogallery import *  # noqa
 from .photogalleryitem import *  # noqa
 from .page import *  # noqa
 from .sitesetting import *  # noqa
+from .upload import *  # noqa

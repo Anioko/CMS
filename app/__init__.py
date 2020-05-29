@@ -104,6 +104,19 @@ def create_app(config):
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint, url_prefix='/main')
 
+    from .school import school as school_blueprint
+    app.register_blueprint(school_blueprint, url_prefix='/account/school')
+
+    from .workplace import workplace as workplace_blueprint
+    app.register_blueprint(workplace_blueprint, url_prefix='/account/workplace')
+
+    from .employment import employment as employment_blueprint
+    app.register_blueprint(employment_blueprint, url_prefix='/account/employment')
+
+    from .opportunity import opportunity as opportunity_blueprint
+    app.register_blueprint(oppportunity_blueprint, url_prefix='/account/opportunity')
+
+
     from .account import account as account_blueprint
     app.register_blueprint(account_blueprint, url_prefix='/account')
 

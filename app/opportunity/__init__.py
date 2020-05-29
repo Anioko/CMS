@@ -1,2 +1,3 @@
-from app.blueprints.professionals import errors  # noqa
-from app.blueprints.professionals.views import professionals  # noqa
+from app.opportunity import errors  # noqa
+from app.opportunity.views import opportunity  # noqa
+

@@ -30,7 +30,7 @@ def create_opportunity():
             db.session.add(appt)
             db.session.commit()
             flash('Opportunity added!', 'success')
-            return redirect(url_for('opportunity.opportunity_details', id=appt.id, title=appt.title,
+            return redirect(url_for('opportunity.opportunity_details', title=appt.title,
                                     city=appt.city, state=appt.state,
                                     country=appt.country))
         else:

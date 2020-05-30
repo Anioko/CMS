@@ -44,5 +44,7 @@
               <input type="hidden" name="csrf_token" value="{{ csrf_token()|safe }}">
             </div>
         {% endif %}
+        {{ moment.include_jquery() }}
+        {{ moment.include_moment() }}
     </body>
 </html>

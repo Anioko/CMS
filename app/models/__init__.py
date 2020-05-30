@@ -21,3 +21,4 @@ from .employment import *  # noqa
 from .school import *  # noqa
 from .workplace import *  # noqa
 from .opportunity import *  # noqa
+from .contractor import *  # noqa

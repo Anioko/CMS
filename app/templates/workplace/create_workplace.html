@@ -3,6 +3,8 @@
 {% import 'macros/check_password.html' as check %}
 
 
+
+
 {% block scripts %}
 {% endblock %}
 
@@ -12,8 +14,8 @@
                 <i class="caret left icon"></i>
             </a>
             <h2 class="ui header">
-                Add the type of job opportunity you are looking for. 
-                <div class="sub header">Add opportunity</div>
+                Add details of your previous jobs or your current job. 
+                <div class="sub header">Add details</div>
             </h2>
 
             {% set flashes = {
@@ -24,21 +26,31 @@
             } %}
 
             {{ f.begin_form(form, flashes) }}
+			
 
-            <div class="field">
-                {{ f.render_form_field(form.title) }}
-            </div>
-            <div class="two fields">
-                {{ f.render_form_field(form.opportunity_type) }}
-                {{ f.render_form_field(form.location_type) }}
+
+  
+
+ 
+            <div class="three fields" id="datepicker" size="30" type="date" >
+                {{ f.render_form_field(form.name) }}
+                {{ f.render_form_field(form.start_date) }}
+				{{ f.render_form_field(form.end_date) }}
             </div>
             <div class="three fields">
                 {{ f.render_form_field(form.city) }}
                 {{ f.render_form_field(form.state) }}
                 {{ f.render_form_field(form.country) }}
-            </div>			
+            </div>
+            <div class="two fields">
+                {{ f.render_form_field(form.role) }}
+                {{ f.render_form_field(form.role_description) }}
+            </div>
             <div class="field">
-                {{ f.render_form_field(form.summary) }}
+                {{ f.render_form_field(form.currently) }}
+            </div>
+            <div class="field">
+                {{ f.render_form_field(form.description) }}
             </div>
 
             {{ f.form_message(flashes['error'], header='Something went wrong.', class='error') }}

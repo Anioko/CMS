@@ -9,7 +9,6 @@ from .. import db, login_manager
 
 class Permission:
     GENERAL = 0x01
-    EDIT = 0x07
     ADMINISTER = 0xff
 
 
@@ -26,7 +25,6 @@ class Role(db.Model):
     def insert_roles():
         roles = {
             'User': (Permission.GENERAL, 'main', True),
-            'Editor': (Permission.EDIT, 'site', False),
             'Administrator': (
                 Permission.ADMINISTER,
                 'admin',
@@ -39,7 +37,7 @@ class Role(db.Model):
                 role = Role(name=r)
             role.permissions = roles[r][0]
             role.index = roles[r][1]
-            role.default = roles[r][2][3]
+            role.default = roles[r][2]
             db.session.add(role)
         db.session.commit()
 

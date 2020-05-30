@@ -1,16 +1,16 @@
 {% extends 'layouts/base.html' %}
 {% block page_title %}{{ appt.title or '(No Title)' }} opportunity in {{ appt.city|default('') }}{% endblock %}
 {% block custom_head_tags %}
-    <meta name="description"
-          content="{{ appt.description }}">
+    <meta name="summary"
+          content="{{ appt.summary }}">
     <meta name="author" content="{{ config.APP_NAME }}">
     <meta name="og:title" content="{{ appt.title or '(No Title)' }}, {{ config.APP_NAME }} "/>
     <meta name="og:type" content="website"/>
     <meta name="og:url" content="https://www.{{ config.APP_NAME }}.com"/>
     <meta name="og:image" content="{{ url_for('static', filename='images/home/slider/hill.png') }}"/>
     <meta name="og:site_name" content="{{ config.APP_NAME }}"/>
-    <meta name="og:description"
-          content="{{ appt.description }}"/>
+    <meta name="og:summary"
+          content="{{ appt.summary }}"/>
     <meta name="twitter:card" content="summary"/>
     <meta name="twitter:site" content="@medivillenetwork"/>
     <meta name="twitter:creator" content="@anioko1"/>
@@ -28,8 +28,8 @@
             <div class="ui two column centered grid">
                 <div class="column">
                     <hr>
-                    <h4>opportunity description</h4><!---I took out |default('')|markdown here---->
-                    {{ appt.description }}
+                    <h4>opportunity summary</h4><!---I took out |default('')|markdown here---->
+                    {{ appt.summary }}
                     {{ share.create(title='Share with: ') }}
                     <hr>
                 </div>
@@ -61,7 +61,7 @@
                 <i class="fa fa-linkedin fa-2x"></i>
             </a>
 
-            <a href="http://vk.com/share.php?url={{ url_for('opportunity.opportunity_details',title=appt.title,city=appt.city,state=appt.state, country=appt.country, _external=True) }}&title={{ appt.title }} in {{ appt.city }}&description=Mediville.com!&image=https%3A%2F%2Ffbcdn-sphotos-g-a.akamaihd.net%2Fhphotos-ak-frc3%2Ft1%2F10007500_219483098251971_1640217409_n.jpg"
+            <a href="http://vk.com/share.php?url={{ url_for('opportunity.opportunity_details',title=appt.title,city=appt.city,state=appt.state, country=appt.country, _external=True) }}&title={{ appt.title }} in {{ appt.city }}&summary=Mediville.com!&image=https%3A%2F%2Ffbcdn-sphotos-g-a.akamaihd.net%2Fhphotos-ak-frc3%2Ft1%2F10007500_219483098251971_1640217409_n.jpg"
                title="On VK.com" target="_blank" class="btn btn-default" style="margin-right:-10px;">
                 <i class="fa fa-vk fa-2x"></i>
             </a>

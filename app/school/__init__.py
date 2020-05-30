@@ -1,2 +1,2 @@
-from app.main import errors  # noqa
-from app.main.views import main # noqa
+from app.school import errors  # noqa
+from app.school.views import school # noqa

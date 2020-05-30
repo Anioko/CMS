@@ -5,6 +5,7 @@ from flask_assets import Environment
 from flask_compress import Compress
 from flask_login import LoginManager
 from flask_mail import Mail
+from flask_moment import Moment
 from flask_rq import RQ
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import CSRFProtect
@@ -22,6 +23,7 @@ mail = Mail()
 db = SQLAlchemy()
 csrf = CSRFProtect()
 compress = Compress()
+moment = Moment()
 #pagedown = PageDown()
 #dropzone = Dropzone()
 
@@ -74,6 +76,7 @@ def create_app(config):
     csrf.init_app(app)
     compress.init_app(app)
     RQ(app)
+    moment.init_app(app)
     #Markdown(app)
     #pagedown.init_app(app)
     #dropzone.init_app(app)
@@ -114,7 +117,7 @@ def create_app(config):
     app.register_blueprint(employment_blueprint, url_prefix='/account/employment')
 
     from .opportunity import opportunity as opportunity_blueprint
-    app.register_blueprint(oppportunity_blueprint, url_prefix='/account/opportunity')
+    app.register_blueprint(opportunity_blueprint, url_prefix='/account/opportunity')
 
     from .contractor import contractor as contractor_blueprint
     app.register_blueprint(contractor_blueprint, url_prefix='/account/contractor')

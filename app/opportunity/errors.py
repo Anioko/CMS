@@ -1,6 +1,6 @@
 from flask import render_template
 
-from app.blueprints.opportunity.views import opportunity
+from app.opportunity.views import opportunity
 
 
 @opportunity.app_errorhandler(403)

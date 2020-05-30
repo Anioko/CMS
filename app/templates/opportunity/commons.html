@@ -42,8 +42,8 @@
         {% if field.errors %}
             <span class="error help-inline">{{ field.errors|join(', ') }}</span>
         {% endif %}
-        {% if field.description %}
-            <p class="help-block">{{ field.description|safe }}</p>
+        {% if field.summary %}
+            <p class="help-block">{{ field.summary|safe }}</p>
         {% endif %}
 
     </div>

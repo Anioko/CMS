@@ -1,2 +1,2 @@
-from app.main import errors  # noqa
-from app.main.views import main # noqa
+from app.workplace import errors  # noqa
+from app.workplace.views import workplace # noqa

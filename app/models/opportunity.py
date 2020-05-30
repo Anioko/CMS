@@ -1,4 +1,13 @@
+import json
+import os
+
+import cv2
+from datetime import datetime
+from logging import log
+from time import time
 from app import db
+
+
 
 
 class Opportunity(db.Model):

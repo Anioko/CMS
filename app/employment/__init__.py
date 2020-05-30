@@ -1,2 +1,2 @@
-from app.main import errors  # noqa
-from app.main.views import main # noqa
+from app.employment import errors  # noqa
+from app.employment.views import employment # noqa

@@ -13,8 +13,8 @@
 
         <hr>
 
-        <h3 align="center"> Description</h3>
-        <h6 align="center">{{ appt.description }}</h6>
+        <h3 align="center"> summary</h3>
+        <h6 align="center">{{ appt.summary }}</h6>
         <hr>
     {% endif %}
 
@@ -86,8 +86,8 @@
         {% if field.errors %}
             <span class="error help-inline">{{ field.errors|join(', ') }}</span>
         {% endif %}
-        {% if field.description %}
-            <p class="help-block">{{ field.description|safe }}</p>
+        {% if field.summary %}
+            <p class="help-block">{{ field.summary|safe }}</p>
         {% endif %}
     </div>
 {%- endmacro %}
@@ -132,8 +132,8 @@
         {% if field.errors %}
             <span class="error help-inline">{{ field.errors|join(', ') }}</span>
         {% endif %}
-        {% if field.description %}
-            <p class="help-block">{{ field.description|safe }}</p>
+        {% if field.summary %}
+            <p class="help-block">{{ field.summary|safe }}</p>
         {% endif %}
 
     </div>

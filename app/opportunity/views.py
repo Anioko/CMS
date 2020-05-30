@@ -2,6 +2,8 @@ from flask import Blueprint, render_template, abort, flash, redirect, url_for, r
 from flask_login import current_user, login_required
 
 from app.models import *
+from app.opportunity.forms import *
+
 
 opportunity = Blueprint('opportunity', __name__)
 
@@ -21,10 +23,8 @@ def create_opportunity():
                        city=form.city.data,
                        state=form._state.data,
                        country=form.country.data,
-                       description=form.description.data,
                        #start_date=form.start_date.data.strftime('%d %B, %Y'),  # ''' ##('%Y-%m-%d') Alternative '''
                        #end_date=form.end_date.data.strftime('%d %B, %Y'),  # ''' ##('%Y-%m-%d') Alternative '''
-                       title=form.title.data,
                        summary=form.summary.data,
                        opportunity_type=form.opportunity_type.data,
                        available_now=form.available_now.data,
@@ -39,7 +39,7 @@ def create_opportunity():
         else:
 
             flash('ERROR! Opportunity was not added.', 'error')
-    return render_template('opportunity/create_opportunity.html', form=form, opp=opp)
+    return render_template('opportunity/create_opportunity.html', form=form)
 
 @opportunity.route('/list/')
 def opportunity_list():

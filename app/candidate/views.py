@@ -24,8 +24,9 @@ def candidate_list():
     #def candidate_list():
     appts = User.query.all()
     # same, using class-bound attribute
-    appt = db.session.query(User).options(lazyload(User.schools)).all()
-    return render_template('candidate/index.html', appts=appts, appt=appt)
+    appt = db.session.query(User).options(lazyload(User.schools)).first()
+    opportunities_listed = Opportunity.query.filter(Opportunity.user_id == User.id).all()
+    return render_template('candidate/index.html', appts=appts, appt=appt, opportunities_listed=opportunities_listed)
 
 
 

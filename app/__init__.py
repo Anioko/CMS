@@ -139,5 +139,8 @@ def create_app(config):
 
     from .uploads import uploads as uploads_blueprint
     app.register_blueprint(uploads_blueprint, url_prefix='/uploads')
+
+    from .candidate import candidate as candidate_blueprint
+    app.register_blueprint(candidate_blueprint, url_prefix='/candidate')
     
     return app

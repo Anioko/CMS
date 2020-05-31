@@ -24,9 +24,8 @@ def create_employment():
             db.session.add(appt)
             db.session.commit()
             flash('Employment details added!', 'success')
-            return redirect(url_for('employment.employment_details', id=appt.id, title=appt.title,
-                                    city=appt.city, state=appt.state,
-                                    country=appt.country))
+            return redirect(url_for('employment.employment_details', id=appt.id, minimum_pay=appt.minimum_pay,
+                                    maximum_pay=appt.maximum_pay, currencies=appt.currencies))
         else:
 
             flash('ERROR! details was not added.', 'error')
@@ -45,7 +44,7 @@ def employment_list():
 
 @employment.route('/<int:id>/<minimum_pay>/<maximum_pay>/<currencies>/')
 def employment_details(id, minimum_pay, maximum_pay, currencies):
-    appts = Employment.query.filter(employment.id == id).first_or_404()
+    appts = Employment.query.filter(Employment.id == id).first_or_404()
     org_users = User.query.all()
-    orgs = employment.query.filter(employment.user_id == User.id).all()
+    orgs = Employment.query.filter(Employment.user_id == User.id).all()
     return render_template('employment/employment_details.html', appt=appts, orgs=orgs, org_users=org_users)

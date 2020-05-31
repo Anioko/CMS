@@ -1,0 +1,18 @@
+
+{% macro candidate_wid(candidate) %}
+    <div class="card">
+        <div class="content">
+            <img class="right floated mini ui image" src="{# user.get_photo() #}">
+            <div class="header">
+                <!---<a href="{# url_for('main.user', id=user.id, full_name=user.full_name) #}">{# user.full_name #}</a>--->
+            </div>
+            <div class="meta">
+                {{ candidate.school.city }}, {{ candidate.school.state }}, {{ user.school.country }}
+            </div>
+            <div class="description">
+
+            </div>
+
+        </div>
+    </div>
+{% endmacro %}

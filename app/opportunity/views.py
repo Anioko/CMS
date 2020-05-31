@@ -21,7 +21,7 @@ def create_opportunity():
             appt = Opportunity(title=form.title.data,
                        user_id=current_user.id,
                        city=form.city.data,
-                       state=form._state.data,
+                       state=form.state.data,
                        country=form.country.data,
                        #start_date=form.start_date.data.strftime('%d %B, %Y'),  # ''' ##('%Y-%m-%d') Alternative '''
                        #end_date=form.end_date.data.strftime('%d %B, %Y'),  # ''' ##('%Y-%m-%d') Alternative '''

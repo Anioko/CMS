@@ -56,6 +56,13 @@ class User(UserMixin, db.Model):
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     pages = db.relationship('Page', backref='user', lazy='dynamic')
     blogposts = db.relationship('BlogPost', backref='user', lazy='dynamic')
+
+    employments = db.relationship('Employment', backref='user', lazy='dynamic')
+    schools = db.relationship('School', backref='user', lazy='dynamic')
+    workplaces = db.relationship('Workplace', backref='user', lazy='dynamic')
+    opportunities = db.relationship('Opportunity', backref='user', lazy='dynamic')
+    contractors = db.relationship('Contractor', backref='user', lazy='dynamic')
+    
     #users = db.relationship('User', backref='role', lazy='dynamic')
     created_on = db.Column(db.DateTime)
     username = db.Column(db.String(64), unique=True, index=True) #Notsure if this is used

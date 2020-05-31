@@ -9,6 +9,7 @@ class OpportunityForm(FlaskForm):
     summary = StringField(' Write a very short summary')
     opportunity_type = SelectField(u'Type', choices=[('Contract', 'Contract'), ('Permanent', 'Permanent')])
     location_type = SelectField(u'Onsite or Remote', choices=[('Onsite', 'Onsite'), ('Remote', 'Remote')])
+    available_now = SelectField(u'Availability?', choices=[('Now', 'Now'), ('Later', 'Later')])
     city = StringField('Which City?')
     state = StringField('Which State?')
     country = StringField('Which Country?')

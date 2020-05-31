@@ -1,0 +1,20 @@
+{% extends 'layouts/base.html' %}
+{% import 'macros/candidate_macros.html' as candidate_wid %}
+
+{% block content %}
+    <div class="ui two column centered grid">
+        <div class="column">
+            <h1>Published candidates</h1>
+        </div>
+    </div>
+    <div class="ui grid">
+        <div class="four wide column"></div>
+        <div class="eight wide column">
+            <div class="ui cards">
+                {% for candidate in appts %}
+                    {{ candidate_wid.candidate_wid(candidate) }}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
